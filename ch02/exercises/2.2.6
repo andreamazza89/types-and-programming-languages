@@ -1,0 +1,21 @@
+# Question
+Suppose we are given a relation R on a set S. Define relation R' as follows:
+
+  R' = R ∪ {(s,s) | s ∈ S}
+
+That is, R' contains all the pairs in R plus all the pairs of the form (s,s).
+Show taht R' is the reflexive closure of R.
+
+# Answer
+Given the definition of a reflexive closure
+
+> the smallest reflexive relation R' that contains R
+(R being a binary relation on a set S)
+
+So, first of all, for R' to be reflexive, it needs to contain {(s,s) | s ∈ S}.
+
+To be the reflexive closure if also needs to contain R, so the union between the
+two (R ∪ {(s,s) | s ∈ S}) forms a reflexive closure.
+
+In fact, this is the recipe for making a reflexive closure: take a binary relation
+R on set S, and make the union with all the reflexive pairs of S.

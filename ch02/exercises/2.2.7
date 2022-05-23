@@ -1,0 +1,40 @@
+# Question
+Here is a more constructive definition of the transitive closure of a relation R.
+First, we define the following sequence of sets of pairs:
+
+  Ro     = R
+  Ri+1   = Ri U {(s,u) | for some t, (s,t) ∈ Ri and (t,u) ∈ Ri}
+
+  R+ = Ui Ri
+    (the union of all Ri)
+
+# Answer
+Much like the previous exercise, the above seems to be a recipe for taking a relation R (that
+is not transitive) and building its transitive closure.
+
+Not going to attempt a formal proof, but work through an example.
+
+The first two definitions above describe a step in adding pairs towards transitivity.
+Let's take a relation R as {(s,t), (t,u), (u,p)}
+
+To visualise what the definition above does, is it takes one element that exists in two pairs, and
+then adds a pair with the remaining two:
+
+  {(s,t), (t,u), (u,p)}
+      ^----^                 (add (s,u))
+             ^----^          (add (t,p))
+
+so now we have {(s,t), (s,u), (t,u), (t,p), (u,p)}. Doing the step again
+
+  {(s,t), (s,u), (t,u), (t,p), (u,p)}
+      ^-----------^                 (nothing to do (s,u) already exists)
+             ^------------------^   (add (s,p))
+                    ^-----------^   (nothing to do (t,p) already exists)
+
+which gives {(s,t), (s,u), (t,u), (t,p), (u,p), (s,p)}. Trying the step again leaves the set unchanged.
+The step we take guarantees transitivity as it's the definition of transitivity (for every two pairs
+sharing a 'middle' element, create a new relation between the 'outer' elements).
+
+So the union of al Ri eventually makes a starting relation transitive and stops adding new pairs (kinda like
+a fix point?), so the result is transitive, contains the original relation and is as small as it could be.
+

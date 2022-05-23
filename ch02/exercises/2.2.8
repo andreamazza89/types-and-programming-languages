@@ -1,0 +1,40 @@
+# Question
+Suppose R is a binary relation on a set S and P is a predicate on S that is preserved by R.
+Show that P is also preserved by R*.
+
+# Answer
+🤔 I first want to try visualise this with an example. Let's take a set S {a, b, c, d}
+I think a predicate means a relation to a boolean for every element of the set. So let's say
+P as a predicate 'is the letter a', giving {(a,T), (b,F), (c,F)}.
+
+Now the question also mentions a relation R on S that preserves the predicate; I'm not 100% sure
+I understand what it means for the relation to preserve the predicate.
+
+Found the definition (2.1.10):
+
+> P is *preserved by* R if whenever we have s R s' and P(s) we also have P(s').
+
+Ok, but does it mean that we have a boolean for P(s) and P(s') or that the value is the same?
+I guess if a Predicate needed to have a pair for every element of the initial set, then i has to be the
+latter, which I think makes most sense.
+
+Uh - I got it. Looking at the definition of a predicate (2.1.4), this (P) is defined as a set of all
+True elements, which makes sense as it avoids redundant information.
+
+So back to the example, we should state P as simply {a}.
+Now let's make up a relation that preserves P, for example R {(a,a), (b,c), (c,d)}
+
+Ok, let's try work on the reflexive closure first.
+
+Recall that to make a reflexive closure you simply take a given relation and do the union with all the
+reflexive pairs of the base set. The reflexive pairs must preserve the predicate since they repeat the same
+element in the pair. So the union of a relation that preserves the predicate and the reflexive pairs still
+respects the predicate.
+
+Onto transitive closure. If we can prove that adding the 'transitive arrows' respects the predicate, then
+we are done.
+Recall exercise 2.2.7 - to make a relation into the transitive closure, we match pairs like
+  (out1, mid) (mid, out2) ------> (out1, out2)
+Now, since the left hand side preserves the predicate, the `mid` element is 'forcing' the mapping (out1, out2)
+to also preserve the predicate, because they both must have the same boolean entry as does `mid`.
+
