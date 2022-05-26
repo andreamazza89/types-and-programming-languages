@@ -1,3 +1,6 @@
+# Types and programming languages
+My notes and exercises for [this book](https://www.cis.upenn.edu/~bcpierce/tapl/)
+
 ## Note conventions
 
 - A direct quote from the book look like this:
