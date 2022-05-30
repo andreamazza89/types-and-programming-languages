@@ -10,3 +10,5 @@ My notes and exercises for [this book](https://www.cis.upenn.edu/~bcpierce/tapl/
 
 - A comment/thought of mine is prefixed by a `~`.
 
+- Something I cannot wrap my head around is prefixed by a `~?`
+

@@ -1,0 +1,33 @@
+# Question
+How many elements does S3 have?
+
+# Answer
+I'm tempted to just count it.
+
+My intuition is that there might be some kind of formula to calculate how many elements each
+'generation' adds once from S4 onwards. But I'm not gonna investigate that.
+
+Ok, so we have
+
+S0 - 0
+S1 - 3
+S2 - 39
+S3 - 59439
+
+Right, maybe I did find out how to figure out the number in the next generation, it seems to be
+
+3
+  + succ*(total in previous gen)
+  + pred*(total in previous gen)
+  + iszero*(total in previous gen)
+  + if/then-(total in previous gen) to the power of three
+
+mmm I initially thought the if/then would be the permutations of the previous generation, whereas the
+book's solution is the cube - trying to understand why.
+I guess one first thing to notice is that t1,t2,t3 in the if/then/else can all be the same, so it's not just
+the permutations but other triplets, like true,true,true, and true,true,false - wonder if there's a combinatorial
+name for something like this.
+Ok, I didn't find a name than permutations with repetition, but the idea is that for every element of the term, you
+have n options (n being the total of the previous gen), so given that there are 3 elements you take n choices
+for the if, times n for the else, times n for the then, giving us cube.
+

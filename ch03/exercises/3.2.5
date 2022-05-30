@@ -1,0 +1,24 @@
+# Question
+Show that the sets Si are *cumulative* - that is, that for each i we have
+
+Si ⊆ Si+1
+
+# Answer
+Let's get the definition:
+
+S0 = {}
+
+Si+1 =   {true,false,0}
+       ∪ {succ t1, pred t1, iszero t1 | t1 ∈ Si}
+       ∪ {if t1 then t2 else t3 | t1,t2,t3 ∈ Si}
+
+So first S0, which is the empty set, so it is a subset of any other set.
+
+The set of constants is in all the following 'generations'.
+
+For the second and third lines ({succ t1 ... and if/then), because these elements are built on the previous set,
+each new set will contain the same elements and add more.
+
+-----
+Not sure this is very rigorous, gonna take a look at the solution now.
+

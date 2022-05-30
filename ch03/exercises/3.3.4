@@ -1,0 +1,36 @@
+# Question
+Proof for the 3 Induction principles.
+
+# Answer
+
+
+## Induction on Depth
+
+> if, for each term `s`,
+>     given `P(r)` for all `r` such that `depth(r) < depth(s)
+>     we can show `P(s)`,
+>  then `P(s)` holds for all `s`
+
+Meaning that if a certain property holds for a term at a certain depth, if we can
+show that it still holds at a deeper level, then it always holds.
+
+~ is this is a bit meta? as in, are we trying to show that induction works by using an
+~ inductive proof?
+
+maybe it's some sort of case analysis?
+
+I feel like for constants and succ/pred/iszero, this is simply true in a very similar way to mathematical induction:
+if the property holds at a certain depth, and we show that it's true at a 'higher' depth, then we create a sort of
+'infinite chain' of proofs: say the thing is true at depth 1, because we also proved that it's true at a higher depth
+we can say that it's true at depth 2, now that we now that it's true at depth 2, we rinse/repeat and could go forever.
+
+For if/then/else, this also works, though does not guarantee that we are covering all `s` terms, as we might be 'jumping'
+a few. However, the above terms 'grow' by one, so the two together should cover all terms.
+
+Wow this feels very brittle/informal...gonna look at the solution now.
+
+Well, it wasn't too far off I think? they define a new predicate based on natural numbers, representing the depth of
+the term, then say that this is basically natural number induction.
+
+The other two use a similar mechanism so won't go through them.
+
