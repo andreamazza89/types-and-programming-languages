@@ -17,6 +17,12 @@ What terms 'mean'. Interestingly, the first book's description is
 which I like as it's very pragmatic, though we should define what 'evaluation' means
 
 ## Evaluation
+The process of taking a term and applying evaluation rules to produce another term.
+See Semantics.
+
+## Value
+A term that cannot be evaluated further, as there are no evaluation rules that apply.
+This is also known as *normal form*
 
 ## Well-Typed
 

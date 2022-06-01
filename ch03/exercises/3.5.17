@@ -1,0 +1,19 @@
+# Question
+Show that the small-step and big-step semantics for this language coincide.
+
+# Answer
+I guess case analysis it is again.
+
+---------
+-- Values
+For values, there are no rules that apply in small-step, so they are the end-state of the
+evaluation, which is pretty much the definition of B-VALUE.
+
+--------
+-- If/Else
+
+let's take `t` as the term `if t1 then t2 else t3`
+
+when t1 is true/false, then we have direct equivalence with B-IFTRUE/IFFALSE
+
+OK - I give up :(

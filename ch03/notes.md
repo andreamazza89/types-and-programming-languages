@@ -1,6 +1,6 @@
 # 3 Untyped Arithmetic Expressions
 
-This chapter establishes a very small language mad up of numbers and booleans that sets the basis
+This chapter establishes a very small language made up of numbers and booleans that sets the basis
 for having precise, mathematical tools to talk about the syntax and semantics of programs, which
 will then allow us to talk about type systems.
 
@@ -9,7 +9,7 @@ will then allow us to talk about type systems.
 We are going to introduce a very simple language, where we have booleans, the number 0, the predicate
 `isZero`, `succ`/`prec` to create more numbers and conditionals (if t then t else t).
 
-The grammar given describes the abstract sysntax of the language. Each 'line' in the grammar is a `term`.
+The grammar given describes the abstract syntax of the language. Each 'line' in the grammar is a `term`.
 Right now 'term' and 'expression' means the same, but later we will specialise the latter to term/type/kind
 expressions, whereas terms represent computations.
 
@@ -49,7 +49,7 @@ The final representation of the grammar is a "recipe" for generating the element
 ~    to write nonsense. Phantom types can help with preventing nonesense - lol which is meta, because there we use types
 ~    to create a DSL that prevents clients from writing invalid phrases; still needs a type system though!
 
-~ 2. given a finite set of possible terms, languages have a finite (though incredibly large) number of programs one could
+~ 2. given a finite set of possible terms, languages have an infinite number of programs one could
 ~    write. This is kinda interesting philosophically, like one way to look at programming is to find the right program
 ~    amongst this huge set of syntactically valid ones - kinda trippy!
 
@@ -59,7 +59,7 @@ The fact that T (inductive/inference definition of the language syntax) and S (t
 some implications that we'll explore
 
 ~? I am not sure I see how this is the case? Maybe it'll be clearer once I finish the chapter. The main insight
-~? seems to be arond the fact that the metavariable `t1` in a term like `succ t1` is a *smaller* term.
+~? seems to be around the fact that the metavariable `t1` in a term like `succ t1` is a *smaller* term.
 ~? Which makes sense, but I'm not sure I see why we need S = T to infer this?
 ~? Also, I guess *smaller* means a shallower tree?
 
@@ -131,7 +131,7 @@ machine, this is how we move from one state to the next one.
 
 ~ interesting that the rules given do not include the constants true/false. Or at least a mention that the program is
 ~ finished when we are left with a constant.
-~ ... as the book mentions, this is implicit: because they don't evaluate to anything, they do not appear
+~ ... ha - the book mentions that this is implicit: because they don't evaluate to anything, they do not appear
 
 Notice that the rules include an order of evaluation, meaning that the if guard is first evaluated until we reach
 true/false and only then do we continue evaluating either the then or else branches.
@@ -139,5 +139,51 @@ In a way, this makes the 'leaf' rules (ones where the predicate is a boolean) th
 the other one is more of a control-flow one. Because of this, the former ones are referred to as *computation rules* as
 opposed to *congruence rules*.
 
+There are a few formal terms around evaluation rules:
 
+- an *instance* of a rule is when you replace metavariables with terms, effectively writing a program
+- a rule is *satisfied* by a relation (guessing a binary relation within the infinite set of terms) if for each instance of
+  the rule either the conclusion is in the relation or one of the premises is not.
+- the *one-step evaluation* relation is the smallest binary relation that satisfy all rules of evaluation. any pair in this
+  relation is called *derivable*.
+
+
+There is such thing as a *derivation tree*, which evaluates a term all the way to the leaves, which are either an instance of
+`E-IfTrue` or `E-IfFalse`.
+
+An evaluation statement `t -> t'` is derivable iff a derivation tree exists where the root is `t -> t'` is useful for a
+proof technique called *induction on derivations*.
+
+3.5.4 is a theorem + proof on the fact that the evaluation `t -> t'` is unique, meaning that if given `t -> t''`, then
+`t' = t''`.
+
+~? I can't fully grasp the proof, so going to move on and take the theorem as a given.
+
+A term is in *normal form* when there are no evaluation rules that apply, meaning that we cannot evaluate it further.
+true and false are normal forms in the current system.
+
+This is also another way to look at values, which is that values are all terms in normal form.
+
+> being in normal form is part of what it *is* to be a value, and any language definition in which this ins not the case is simply broken
+
+Notice that while every value is a normal form, not every normal form is a value (though this is true with the simple language so
+far). Normal forms that are not values are *run-time errors*.
+
+A *multi-step evaluation* relation, shown as `-->*` is defined as the *reflexive* and *transitive* closure of one-step evaluation.
+
+~? Trying to get an intuition for the above... the transitivity I see as being able to just 'jump' to normal form, but I'm not so
+~? sure about relexivity: does it mean that we can go 'backwards'? This seems wrong, as we cannot evaluate a value back into a term
+~? I guess it's not that, but rather saying that any term can be evaluated to itself?
+~? mmmmmaybe that's the identity function? what's the point though?
+
+Every term evaluates to a value. This is not true in 'richer' languages, but it is with the current one.
+
+----
+The book now introduces numerical values.
+
+Notice that we need to have exhaustive rules of evaluation for all terms. This includes `pred 0`, which is simply defined as
+evaluating to 0, but also `pred true`, which does not have a rule, so that it is normal form, but not a value, which we refer to
+as *stuck*
+
+In this simple language of booleans and numbers, being stuck is exactly what a run-time error is.
 

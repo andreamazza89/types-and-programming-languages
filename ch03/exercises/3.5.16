@@ -1,0 +1,73 @@
+# Question
+See the book - basically we need to prove that in this language (arith), treating
+run-time errors by classifying them and giving the evaluation rules is equivalent to
+not having evaluation rules for these errors.
+
+# Answer
+So the first step is to formally define what it means for these two approaches to be
+'equivalent'. I will then peek at the solution before moving on to attempt a proof.
+
+Let's call the two approaches no-rules and wrong-terms.
+
+One intuition I have is:
+
+- call NR (no rule) the subset of all terms that are neither values nor have a rule in the no-rules approach
+- call WR (wrong) the subset of all terms that evaluate to `wrong`
+
+then the two should be equal; though this doesn't quite work yet, as the terms are different in the two approaches. I guess they
+should have the same cardinality, but that's hardly useful.
+
+Another idea on a similar line is that for each approach, if we take the difference between all terms and the
+ones that do not end up in either `wrong` or a stuck state, then these two things should be equal.
+Or we could state this as
+
+A - the subset of the no-rules terms that do not have an element in the evaluation relation
+B - the subset of the wrong-terms for which the evaluation leads to something other than `wrong`
+
+A should equal B; in other words A should be a subset of B and viceversa
+
+Ok - I checked the solution, I feel like I get some points? basically the solution says that if the two methods are equivalent,
+then given a term in the original set of terms `g`, for any evaluation that 'evaluates' to a stuck term, the new method should
+evaluate to `wrong`. I think I am kinda saying the other side of the same thing, which is that if we take
+all terms that do not get stuck and the ones that don't evaluate to wrong, then we should have equivalent sets.
+
+Will try and prove the proposition as stated by the book though.
+
+Formally let's call `g` a term in the orignal set of terms and label the evaluation relation like `--o-->`.
+The evaluation relation in the new set of terms will be `--x-->`.
+
+We want to prove that ∀g | g --o--> stuck, g --w--> wrong
+i.e. for all terms g in the original set that evaluate to a stuck term, they evaluate to `wrong` in the new evaluation.
+
+So maybe I go case by case? Feels a bit brute forcey to enumerate every kind of term that leads to stuck but
+I don't have any other more general idea, so...
+
+-------------------
+-------------IF/ELSE
+Let's take the `if t then t else t` form.
+
+A simple one is where we have `if 0 then t1 else t2`
+  --o--> this is stuck as there is no rule for it and it is not a value
+  --w--> using the rule E-IF-Wrong, this evaluates to `wrong`
+
+  staying on the if/else form, what if we have `if (succ t1) then t2 else t3`
+  --o--> using the original rules, E-IF applies, with E-SUCC for t1. Evaluating E-SUCC leads to another `succ t`, so it will eventually either
+      - get to the normal form `succ nv` (which is stuck)
+      - get to a form in which the t1 in `succ t1` is in itself stuck, making the whole term stuck.
+  --w--> with the new rules, we still first apply E-IF with E-SUCC, but then either
+     - E-SUCC successfully evaluates to an nv, which is a `badbool`, so that E-IF-Wrong applies
+     - E-SUCC-WRONG applies (with something like `succ true`), so that we are then left with the form
+       `if wrong then t2 else t3`, which again is covered by E-IF-WRONG, as `wrong` is a badbool
+
+  now let's consider `if (pred t1) then t2 else t3`
+  --o--> the argument is similar to the one above: all the pred-related rules either evaluate to a number (making the
+         if statement stuck) or can get stuck (if the t1 in E-PRED is itself stuck)
+  --w--> here the same argument as above stands: either
+    - E-PRED/E-PREDZERO/E-PREDSUCC evaluate to a number, which is a `badbool`, triggering E-IF-WRONG
+    - E-PRED-WRONG applies, leading to E-IF-WRONG
+
+--------------
+------ at this point I am going to peek at the solution to see if this case-analysis approach is on the right track
+Ok - looks like I was along the right lines with the case analysis, but I'm not leveraging structural induction.
+Meaning that I could for example use the induction hypothesis of saying that `g --w--> wrong` for a subterm.
+

@@ -1,0 +1,18 @@
+# Question
+Rephrase definition 3.5.9 as a set of inference rules
+
+# Answer
+I think this is basically putting the if above a line and the then below it?
+
+Like (T is the set of all terms)
+
+```
+    ∀t ∈ T, t -->* t
+
+    t -->  t'       t -->* t'   t' -->* t''
+    --------        ----------------------
+    t -->* t'              t -->* t''
+```
+
+where I guess the top one is reflexivity and the last one transitivity?
+

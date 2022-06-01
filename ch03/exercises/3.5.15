@@ -1,0 +1,95 @@
+# Question 1
+
+Suppose we add a new rule
+
+  `if true then t2 else t3 --> t3` (E-FUNNY1)
+
+to the ones in Figure 3-1. Which of the boave theorems (4/7/8/11/12) remain valid?
+
+# Answer 1
+
+Let's take one at a time:
+
+3.5.4 - (`if t --> t' and t --> t'' then t' = t''`)
+The new rule invalidates a step in the proof, the one where we infer that for
+E-IfTrue, the two forms must be the same.
+I guess the intuition here is that one could apply either rule for the same instance,
+which yields different results.
+
+so NO for 3.5.4
+
+
+3.5.7 - (every value is in normal form) - I'd say yes, as the new rule does not
+'touch' values.
+
+so YES for 3.5.7
+
+
+3.5.8 - (every normal form is a value)
+I think that the new rule does not invalidate the proof, becuase for the form
+  `if t1 then t2 else t3` with t1 = true, the argument is that is that t is not
+  normal form because we have a match on the E-IfTrue rule - well now we have two
+  matches!
+
+so YES for 3.5.8
+
+
+3.5.11 - (same as 3.5.4 but using multi-step evaluation)
+
+given this is a corollary of the 3.5.4, gonna say NO for 3.5.11
+
+
+3.5.12 - (termination of evaluation)
+
+The proof is based on the fact that each step reduces the size of the term, which
+the new funny rule does, so even though we've removed determinism, programs still
+terminate I think.
+
+so YES for 3.5.12
+
+# Question 2
+Suppose instead that we add this rule:
+
+```
+                   t2 --> t'2
+-------------------------------------------------
+if t1 then t2 else t3  --> if t1 then t'2 else t3
+```
+
+now which of the above theorems remain valid? Do any of the proofs need to change?
+
+# Answer 2
+Basically we've added a rule where we evaluate the then clause first, so I guess
+the intuition here is that if we can evaluate the then clause, we do that until normal
+form and then we do the normal E-IF? though I guess in the absence of some sorta rule
+order, we just have ambiguity - as in, which rule should be used given an if-like
+term?
+
+
+3.5.4 - (`if t --> t' and t --> t'' then t' = t''`)
+here we need to consider how the new rule affects the argument around the E-IF case.
+problem is - I have not understood this part of the proof, so gonna skip this one.
+
+
+3.5.7 - (every value is in normal form)
+again, the new rule does not affect the values
+
+YES for 3.5.7
+
+
+3.5.8 - (every normal form is a value)
+I think the proof still stands using E-IF, but we need to add a new case for E-Funny2.
+I guess the only case we care about if when t2 is not a vale, which, by the hypotesis
+means that it is not normal form, so we are able to evaluate it as t2 --> t'2
+Now this means that the new rule applys, making it not normal form.
+
+YES for 3.5.8
+
+
+3.5.11 - (same as 3.5.4 but using multi-step evaluation)
+
+
+3.5.12 - (termination of evaluation)
+same argument as exercise 1: the new rule also decreases size.
+
+YES for 3.5.12
