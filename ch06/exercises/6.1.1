@@ -1,0 +1,11 @@
+# Question
+write down the corresponding nameless term for the following combinators
+
+# Answer
+
+λs . λz . z                                              -----> λ.λ.0
+λs . λz . s (s z)                                        -----> λ.λ.1 (1 0)
+λm . λn . λs . λz . m s (n z s)                          -----> λ.λ.λ.λ.3 1 (2 0 1)
+λf . (λx . f (λy . (x x y))) (λx . f (λy . (x x) y)) -----> λ. (λ. 1 (λ. (1 1 0))) (λ. 1 (λ. (1 1 0)))
+(λx . (λx. x)) (λx. x)                                   -----> (λ.λ.0) (λ.0)
+

@@ -1,6 +1,9 @@
 # Types and programming languages
 My notes and exercises for [this book](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
+## Running code
+I use Haskell for any exercises that involve coding.
+
 ## Note conventions
 
 - A direct quote from the book look like this:

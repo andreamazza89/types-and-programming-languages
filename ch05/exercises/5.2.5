@@ -1,0 +1,14 @@
+# Question
+Use `prd` to define a subtraction function
+
+# Answer
+The intuition here for a subtraction of m minus n is to apply `prd` to m n times. It's like taking the
+fist number and then repeatedly.
+
+minus = λm . λn . n prd m
+
+--
+
+something interesting here is that for something like 1 - 9 we just get 0 rather than -8. I guess this
+is correct in the domain of positive integers
+

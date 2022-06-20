@@ -1,0 +1,41 @@
+# Question
+Show how to formulate the evaluation rules for lambda-terms in the big-step syte
+
+# Answer
+
+First, the rules given in the book for call-by-value are:
+
+         t1 --> t'1
+      ----------------
+      t1 t2 --> t'1 t2
+
+         t2 --> t'2
+      ----------------
+      v1 t2 --> v1 t'2
+
+      (λx . t12) v2 --> [x --> v2] t12
+
+Now, I'm a bit lost here, but going to try use a similar strategy to what was done with arith,
+whereby rather than taking 1 step, the rules just said to 'go all the way' to a certain kind of value.
+At least that's how I'm reading them.
+
+So then in the first one we change the tow until it becomes a value
+and the same for the second?
+
+         t1 --> v
+      ----------------
+      t1 t2 --> v t2
+
+         t2 --> v
+      ----------------
+      v1 t2 --> v1 v
+
+      (λx . t12) v2 --> [x --> v2] t12
+
+mmmm I feel like I'm off here, but I am lost for ideas, so gonna peek
+ok, it kinda does it all in one rule, though I am not sure I see the difference, as you still have to evaluate
+all terms to values - maybe it's just a way of rephrasing things rather than making evaluation 'faster'
+
+Also, I am not sure I see why the first rule (the one where a lambda reduces to itself) is necessary. Like
+does that not cause an infinite loop if I start using it given that it just results in itself again?
+

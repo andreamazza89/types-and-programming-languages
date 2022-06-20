@@ -1,0 +1,31 @@
+# Question Prove that |FV(t)| <= size(t) for every term t
+
+# Answer
+(In other words, prove that the size of the set of free variables for any lambda term is
+less than or equal to the size of that term.)
+
+There is no definition of size given, but I'll make one up in my head and use that.
+
+---Case by case
+
+-- variable
+For a variable term, the cardinality is exactly one, so it's impossible for it to ever be
+greater than the size of any term. In fact, it is always equal, as the size of a variable term
+is also always 1.
+
+-- abstraction
+I think the size for abstraction (λx . t1) is basically (1 + size(t1))
+Whereas the cardinality of FV (free variables) for abstraction is kinda like whatever t1's size is
+minus 1 if x appears within it.
+
+If every time you add 1 to size you add at most one to FV, then this can never grow bigger than size.
+
+-- application
+I think the size for application (t1 t2) is | size(t1) + size(t2)
+Given that for free variables we have the union of FV(t1) and FV(t2), if the equality
+|FV(t1)| = size(t1) AND |FV(t2)| = size(t2) then the original statement would also be true.
+
+Well, since we've proven the property for all other terms, and given that for a term of this type to
+be finite, both t1 and t2 have to eventually use either variable or abstraction, we should be good?
+
+

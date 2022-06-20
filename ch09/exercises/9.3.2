@@ -1,0 +1,44 @@
+I am betting on it existing so I just have to give an example rather than proving that it does not
+exist.
+
+Before doing that, let's see if the statement feels vaguely right.
+
+  Is there any contect C and type T such that C - x x : T?
+
+(An instinct tells me this might be what omega is.)
+
+So the idea is that two things of the same type (but I can choose what that is) one applied to the other
+yield some type.
+
+The fact that this is function application forces the x to have some kind of function type, so
+
+x : T1 -> T2
+
+but the argument x must have the same shape, so itself must be a function, 'forcing' the argument type
+to be a function
+
+x : (T1 -> T2) -> T3
+
+let's see if that works - I'll just fill in with Booleans
+
+x : ((Bool -> Bool) -> Bool) x : ((Bool -> Bool) -> Bool)
+
+now I'm starting to think that it's not possible... so gonna look up the omega function and see if I can
+leverage that.
+
+omega = (λx . x x) (λx . x x)
+
+ok, so these two terms could have the same type. Although this never terminates, so I don't think I can find
+a type for that.
+
+Maybe I'll switch to the not-possible camp.
+
+Although I've just had an inspiration: the first x must be some function as we're looking at application.
+But then the second one must also be a function as it's got to have the same type.
+So we're looking at a function that's applied to itself.
+
+Ok I am fully lost now - I am gonna place my bet on the answer being that it's possible and using the
+y-combinator's shape, with the function in the context.
+
+nope, not possible, proved by contradiction
+

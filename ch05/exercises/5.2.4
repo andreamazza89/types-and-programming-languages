@@ -1,0 +1,40 @@
+# Question
+Define a term for raising one number to the power of another.
+
+# Answer
+
+I think I could use the definition of multiplication, and define power as multiplying a number by itself
+a number of times.
+
+times = λm . λn . λs . λz . m (n s) z
+
+power = λn . λp . p (times n) n    | this does not work
+
+mmm the above doesn't quite work, maybe another angle is to think about the fact n^0 is always 1?
+
+with that in mind, the following shape would work: when p is 0, then the result is 1
+
+power = λn . λp . p _ 1
+
+now can I fill the blank to make this thing work? my intuition is that we are repeatedly applying a function,
+the first argument being one. I guess that could be *n?
+
+power = λn . λp . p (times n) 1
+
+Yayyyy - it works!! Is it the same as the solution from the book? yes, one of the two ways
+
+The other way looks cool - I wanna try understand it:
+
+power2 = λn . λp . p n
+
+I struggle to get my head around it: my intuition for a number is to repeatedly do a thing (p in the above)
+given a starting point (normally called z). so above we are repeatedly (n times) applying p to what?
+Like where does the z? maybe I should try some concrete example by hand, let's do 1 to the 0
+
+    (λn . λp . p n) (λs1 . λz1 . s1 z1) (λs0 . λz0 . z0)
+--> (λp . p (λs1 . λz1 . s1 z1)) (λs0 . λz0 . z0)
+--> (λs0 . λz0 . z0) (λs1 . λz1 . s1 z1)
+--> λz0 . z0
+
+wat - this doesn't look like a Church numeral - gonna abandon this rabbit hole
+

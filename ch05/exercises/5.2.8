@@ -1,0 +1,78 @@
+# Question
+(See the book)
+
+1 What would the representation of `nil` be?
+2 Write a function `cons` that takes an element `h` and a list (that is, a fold function) `t` and returns
+  a similar representation of the list formed by prepending `h` to `t`.
+3a Write `isnil`
+3b Write `head`
+4 Write a `tail` function
+
+# Answer
+
+First of all I wanna grasp the list representation proposed. From the book:
+
+> the list [x,y,z] becomes a function that takes two arcuments c,n and returns (c x (c y (c z n)))
+
+First guess is that (leaning on my intuition for a reduce function)
+  n is the 'zero' term, as in the first thing we apply our function to
+  c is the 'step' function that takes the list element, the accumulator and returns a new accumulator
+
+---------
+------  1
+
+So then moving to the first question, how do we represent the empty function? I guess it still needs to have
+the two arguments?
+
+nil = λc . λn . n
+
+I'm kinda stretching here, but if I lean back into the definition of reduce, if your list is empty, then
+it just returns the initial value you gave it for accumulation, but I'm not sure if that makes sense.
+The fact that this is equivalent to 0 and false feels like I am probably right. I was right!!
+
+---------
+------  2
+
+cons = λh . λt . λc . λn . (c h (t c n))
+
+wohooo, correct!
+
+---------
+------  3a
+
+isnil = λl . l (λitem . λacc . fls) tru
+
+again,  using the 'reduce' intuition, the initial value for the fold is tru, but then if we apply any step at
+all (i.e. there are items in the list, we just always return fls)
+
+---------
+------  3b
+
+I think that with the way the list is defined, head is the last item in a fold, so if what we do is simply
+apply the fold with a function that returns the item we should be good?
+
+head = λl . l (λitem . λacc . item) nil
+
+yayyy!
+
+---------
+------  4
+
+Right, so I guess we can go through the list and build two lists in a pair, where one is lagging by one step?
+
+like we start with ([], [])
+
+and as we go through the list we go like
+
+([], [in])
+      / \
+  copy  cons
+    /     \
+([in], [in-1, in])
+
+and then at the end pick the one that's lagging behind.
+
+tail = λl .
+          fst (l (λitem . λpair' . pair (snd pair') (cons item (snd pair'))) (pair nil nil))
+
+nailed it!

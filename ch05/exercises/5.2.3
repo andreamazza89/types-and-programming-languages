@@ -1,0 +1,20 @@
+# Question
+Is it possible to define multiplication on Church numerals without using `plus`?
+
+# Answer
+
+(Maybe one way to do this is if we had recursion, though I doubt this is the answer given recursion is
+introduced in a little bit)
+
+The definition of m*n using plus applies `plus n` to the literal `zero` for m times.
+
+I wonder if instead we could say that m*n just does the `n s z` thing m times?
+
+λm . λn . λs . λz . ...
+
+Ok - I give up, I'm lost here, gonna peek at the solution
+
+dang, I feel like I was close with that intuition, the answer in the book is
+
+λm . λn . λs . λz . m (n s) z
+

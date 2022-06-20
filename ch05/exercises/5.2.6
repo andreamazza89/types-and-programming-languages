@@ -1,0 +1,17 @@
+# Question
+Approximately how many steps of evaluation (as a function of n) are required to calculate `prd Cn`?
+
+# Answer
+
+I guess it's as many steps as n times:
+
+  - building the new pair (1)
+  - 'copying' snd into fst (1)
+  - accessing snd (1) to `plus` 1 to it (I cheated a bit here and used a lambda calculator to find out that
+    apparently it's 6 steps to add 1 to any number)
+
+So I'm going to go with 10n.
+
+--- Turns up it was O(n) - I guess this is my lack of understanding of big O calculations. I think
+---    maybe you're supposed to ignore any constant multiplier of n, so that 10n is simplified to just n?
+

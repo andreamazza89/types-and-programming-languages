@@ -1,0 +1,13 @@
+I guess this is like inlining?
+
+Instinctively this feels fine, I struggle to see what the problem would be, but maybe I should
+try dig deeper both in terms of evaluation as well as typing.
+
+In terms of evaluation, perhaps this changes the order? Cause with the let rules, we first evaluate the binding
+to a value, and then proceed, whereas with the suggested form, we might end up evaluating it later.
+
+For example in let x=<some term not in normal form> in <some other term not in normal form> x, with the suggested
+strategy we end up evaluating the <some other term> first. Is this a problem? I cannot see why/how.
+
+In terms of typing I cannot think of any difference, but I am sure I miss a ton of nuance.
+

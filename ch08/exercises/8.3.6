@@ -1,0 +1,19 @@
+Basically the question says:
+
+ given the result t1' of evaluating a term t1 --> t1', AND t1' : T, can we deduce that t : T?
+
+ I am almost definitely missing something here, but I wonder if it could be proven ad absurdum?
+
+Basically if there was some term t for which t : T is not true (i.e. NOT well-typed), then from the
+progress theorem, this term must be stuck.
+But if it is stuck, then it should not be possible to evaluate it, so t : T must be true.
+
+-- Oh no! looking at the solution, the statement is false, given the counterexample
+  if true then 0 else false
+
+mmm I guess where I went wrong is in saying that if a term is ill-typed then it must be stuck.
+Though it's true that
+    if it is     well-typed then it is NOT stuck
+,this doesn't mean that
+    if it is NOT well-typed then it is     stuck
+

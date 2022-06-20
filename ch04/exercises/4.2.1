@@ -1,0 +1,13 @@
+# Question
+Why is using a `try` handler in a recursive loop not a very good style in ML?
+
+# Answer
+My first instinct is that it's much more deliberate/clear to describe the potential for a missing rule
+in the type: instead of 'promising' that evaluating will always return a term, it's better to use
+something like a Maybe. This way any clients will be forced to consider 'stuck' terms within their programs.
+
+--
+
+Well, though I still agree with my argument above, it's more about 'style', whereas the answer was around the fact
+that adding `try` makes the recursive call not tail-recursive.
+

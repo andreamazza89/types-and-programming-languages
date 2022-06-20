@@ -1,0 +1,10 @@
+# Question
+Should we be worried that the negative shift in this rule might create ill-formed terms containing
+negative indices?
+
+# Answer
+I don't think so, because the negative shift happens on a term where either
+
+- the variable 0 was replaced with a value shifted upwards by 1 (so the least index would be 1)
+- any other variable would be at least 1, so taking 1 out of it still gives us 0 rather than a negative number
+

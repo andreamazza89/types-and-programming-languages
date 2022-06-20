@@ -1,0 +1,16 @@
+# Question
+Why did we use a primitive `if` in the definition of g instead of the Curch-boolean `test` function on
+Church booleans?
+
+# Answer
+My initial guess is that maybe `test` does not reduce to a 'nice' form for the worked example?
+Perhaps because if we used `test` we'd have to get `equal` and this doesn't always reduce to a 'nice' form?
+
+So if that was true, we'd need some kind of trick to force evaluation, like still using realeq and then
+converting to a churchboolean?
+
+---- Ok I was way off, it's to do with how in call-by-value both branches of `test` are evaluated, making
+the term diverge. The solution wraps each branch into an abstraction; while the argument is discarded, this
+makes them kind of lazy, in that call-by-value stops evaluating because of the abstraction, and only the
+branches are only evaluated if needed.
+

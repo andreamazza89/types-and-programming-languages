@@ -1,0 +1,49 @@
+# Question
+1. Define a function removenames(t) that takes a naming context C and an ordinary term t
+(th FV(t) ⊆ dom(C)) and yields the corresponding nameless term.
+
+2. Define a function restorenames(t) that does the inverse of the above.
+
+# Answer
+
+I am guessing this is going to be an inductive function definition like the one for size in arith?
+It must be, right? Cause we don't really have the idea of 'maps' or a way to retrieve names in the
+lambda calculus.
+
+Another thought is, how do we do this without keeping track of shifting? I peeked ahead and know a little
+bit about it, which probably doesn't help, as at this point of the book it's not been mentioned.
+
+But how else could this work? I guess I could assume a magic context that automatically updates as we work
+through?
+Also, is there a function to retrieve the index given a variable name?
+
+I'm going to imagine that you can append a variable to the context, so that this shifts them all
+and adds the new one when we 'process' abstraction.
+
+in other words, imagine the context is like [a, b, c], where c has index 0. when you 'hit' an abstraction that
+binds an x, you simply add it to the context lik [a, b, c, x].
+
+I am not sure this works if you have things like (λx . λx . x)? Or maybe it does, and actually removes ambiguity
+as in this example we mean the 'nearest' x rather than the enclosing one I guess?
+
+So, the two functions I wish existed are append(C, x) to add a binding to the end of the context and lookup(C, x)
+to retrieve the index for a variable.
+
+removenames(C, x) = lookup(C, x)
+removenames(C, λx. t1) = λ. removenames(append(C, x), t1)
+removenames(C, t1 t2) = removenames(C, t1) removenames(C, t2)
+
+
+Ok now onto restorenames - I guess we can imagine another function, at, that gives you the variable name at a
+certain index.
+
+restorenames(C, n) = at(C, n)
+restorenames(C, λx. t1) = λ_. restorenames(append(C, ), t1)
+restorenames(C, t1 t2) = restorenames(C, t1) restorenames(C, t2)
+
+mm not sure I fully understand how to choose the first variable name that is not in dom(C) - like
+where are these variables coming from? I wonder if an alternative would be to keep some sort of index and
+just generate a variable like x_i?
+anyways, gonna peek. Ok I guess we don't need to generate it programmatically, so we just say some name such
+that it's not in the context
+

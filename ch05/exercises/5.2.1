@@ -1,0 +1,62 @@
+# Question
+Define logical *or* and *not* functions
+
+# Answer
+
+recall the definitions of tru and fls, which are our primitives
+
+tru = λt . λf . t
+fls = λt . λf . f
+
+---------------------
+--- not
+
+λx . x fls tru
+
+let's try it
+
+     not fls
+=    (λx . x fls tru) fls
+-->  fls fls tru
+=    (λt . λf . f) fls tru
+-->  (λf . f) tru
+-->  tru
+
+     not tru
+=    (λx . x fls tru) tru
+-->  tru fls tru
+=    (λt . λf . t) fls tru
+-->  (λf . fls) tru
+-->  fls
+
+---------------------
+---- or
+
+λx . λy . x tru y
+
+let's try it
+
+    or fls tru
+=   (λx . λy . x tru y) fls tru
+--> (λy . fls tru y) tru
+--> fls tru tru
+--> tru
+
+    or fls fls
+=   (λx . λy . x tru y) fls fls
+--> (λy . fls tru y) fls
+--> fls tru fls
+--> fls
+
+    or tru tru
+=   (λx . λy . x tru y) tru tru
+--> (λy . tru tru y) tru
+--> tru tru tru
+--> tru
+
+    or tru fls
+=   (λx . λy . x tru y) tru fls
+--> (λy . tru tru y) fls
+--> tru tru fls
+--> tru
+

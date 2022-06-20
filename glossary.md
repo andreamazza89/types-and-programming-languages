@@ -25,4 +25,7 @@ A term that cannot be evaluated further, as there are no evaluation rules that a
 This is also known as *normal form*
 
 ## Well-Typed
+A term for which exists a type T such that t : T. In other words, given a typing relation
+T based on typing rules, the given term t belongs to that relation.
+Or, less formally, a term that passes type checking.
 

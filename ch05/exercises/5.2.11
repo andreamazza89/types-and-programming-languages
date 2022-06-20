@@ -1,0 +1,29 @@
+# Question
+Use fix and the encoding of lists from Excercise 5.2.8 to write a function that sums lists of
+Church numerals.
+
+# Answer
+My initial thought is that using fix in unnecessary, as we can simply fold over the list using addition.
+That's not a problem, just getting my thoughts and understanding of the list representation right.
+
+I guess if we were using fix, then the base case would be checking that the list is empty and returning
+zero, whereas the other one just adds the head to the sum of the tail.
+
+(using some definintions, like isnil, from exercise 5.2.8)
+
+sum = λrec . λlist .
+                   test
+                     (isnil list)
+                     c0
+                     plus (head list) (rec (tail list))
+churchnat = fix sum
+
+--- checked the solution; it was mostly right, but I was missing the abstraction around the
+two branches to stop evaluating both all the time - here's the updated solution:
+
+sum = λrec . λlist .
+                   test
+                     (isnil list)
+                     (λ_ . c0)
+                     (λ_ . plus (head list) (rec (tail list))) c0
+churchnat = fix sum

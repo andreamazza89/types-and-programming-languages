@@ -1,0 +1,43 @@
+# Question
+Write a function `equal` that tests two numbers for equality and returns a Church boolean.
+
+# Answer
+My first guess is that we could like count down to zero for both and if we get there at the same time
+they are equal. Though this feels kinda heavy, so gonna try think about other strategies.
+
+Uh - maybe it's not that heavy: you could do `prd` to one number using the other and if at the end you
+have zero they are equal, otherwise they are not. Gonna try that.
+Turns out what I just described is subtraction. If you subtract two numbers and the result is 0 then
+they must be equal. Although as we've seen, in this domain 1 - 10 = 0, but 1 is not 10.
+
+Another foggy thought is to say that if something like this:
+
+  if m==0 v n==0 then
+    pair m n
+  else
+    pair (prd m) (prd n)
+
+this feels a little heavy, but I'm gonna give it a shot. I guess for the iteration we can use either of
+the two numbers and sooner or later they will either both be 0 or only one.
+
+equal = λm . λn . m (test () () ()) (pair m n)
+
+ok before I go too deep, this feels huge, so gonna explore other avenues. I still think it's doable but just
+quite heavy, with nested ifs.
+
+I wonder if there's any other definition of equality other than using their 'distance from zero'?
+or a better way to test it. Ok back to the if above - I've simplified it to just stop taking prd once either
+number reaches zero. Here's my new attempt:
+
+step = λpair' . test (or (iszro (fst pair')) (iszro (snd pair'))) (pair') (pair (prd (fst pair')) (prd (snd pair')))
+
+equal = λm . λn . (λpair' . (and (iszro (fst pair')) (iszro (snd pair')))) (m step (pair m n))
+
+ok gonna check this in the lambda calculator if I can. I feel like there's gonna be an obvious solution to
+make me feel silly..
+It works!!
+
+(looked at the book's solution) oh man, so it gets much cleaner if you just do prd of each other's number and
+then check that both (AND) are zero.
+This accounts for cases like 1 and 9, where a simple subtraction would give 0. Clever!
+

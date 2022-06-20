@@ -1,0 +1,14 @@
+# Question
+Define a function `chruchnat` that converts a primitive natural number into the corresponding Church numeral.
+
+# Answer
+Ok, this probably needs recursion, as we build up the church numeral while we go through the primitive one.
+
+The primitive one looks like `succ (succ (succ 0))`
+
+I guess we could start from the base case and say that if it's 0 then we're done, otherwise we go again
+adding one?
+
+convert = λrecur . λn . if (iszero n) then c0 else (scc (recur (prd n)))
+churchnat = fix convert
+

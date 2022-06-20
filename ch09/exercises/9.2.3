@@ -1,0 +1,24 @@
+gonna try this way: f needs to be some kind of function, which takes x.
+the result of this application must give another function that takes y and gives Bool.
+
+Though there are other ways about this, I am going to make f take some type A and return a function
+
+f : A -> (B -> Bool),
+
+then x needs to be of that type A
+x : A
+
+and why of whatever type the function returned by f needs.
+y : B
+
+A and B can be any type, even the same type, so gonna use Bool:
+
+f : Bool -> (Bool -> Bool),
+x : Bool,
+y : Bool
+
+mm the followup question makes me think I've got this wrong, unless the description is my
+informal notes at the beginning of the exercise?
+
+ok, that was it, nice!
+

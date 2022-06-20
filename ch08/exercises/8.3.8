@@ -1,0 +1,15 @@
+When we enrich the syntax to have `wrong` states, we lose the idea of 'stuck',
+but as we've proven, this is semantically equivalent.
+
+So I guess we would create a new type (something like Err) and then enrich the typing rules to support this.
+
+Now type safety can still be proven with progress+preservation, but by proving that a term is not wrong or
+does not evaluate to it.
+
+mmm I was off the mark there...The book's solution does not introduce a new type.
+
+Interesting, so the progress property simply holds because now we've removed stuck states (so all terms
+are either a value or something that can be evaluated).
+
+For preservation we have to prove that a well-typed term cannot evaluate to wrong.
+

@@ -1,0 +1,70 @@
+# Question
+Adapt these rules to describe the other three strategies for evaluation
+
+# Answer
+
+First, the rules given in the book for call-by-value are:
+
+         t1 --> t'1
+      ----------------
+      t1 t2 --> t'1 t2
+
+         t2 --> t'2
+      ----------------
+      v1 t2 --> v1 t'2
+
+      (λx . t12) v2 --> [x --> v2] t12
+
+--- full-beta reduction (any order, reduce as much as you can)
+
+         t1 --> t'1
+      ----------------
+      t1 t2 --> t'1 t2
+
+         t2 --> t'2
+      ----------------
+      t1 t2 --> t1 t'2
+
+                t1 --> t'1                     |
+      ----------------------------------       |     turns out these two were not necessary
+        (λx . t1 t2) --> (λx . t'1 t2)         |
+                                               |     what if we had something like this:
+                t2 --> t'2                     |       (λb . (λx . x) p)
+      ----------------------------------       |     this does not match any rules? and yet should
+        (λx . t1 t2) --> (λx . t1 t'2)         |     reduce to (λb . p) no?
+
+      (λx . t12) t2 --> [x --> t2] t12
+
+
+-- normal-order (left to right, outside in - reduce as much as you can)
+
+         t1 --> t'1                          | I was quite off on this one, the book defines new
+      ----------------                       | syntactic categories to get there
+      t1 t2 --> t'1 t2
+
+         t2 --> t'2
+      ----------------
+      v1 t2 --> v1 t'2
+
+      (λx . t12) t2 --> [x --> t2] t12
+
+                t1 --> t'1
+      ----------------------------------
+        (λx . t1 t2) --> (λx . t'1 t2)
+
+                t2 --> t'2
+      ----------------------------------
+        (λx . v1 t2) --> (λx . v1 t'2)
+
+-- call by name (left to right, outside in - reduce as much as you can)
+
+         t1 --> t'1
+      ----------------
+      t1 t2 --> t'1 t2
+
+         t2 --> t'2      |   this needs to go. which makes sense
+      ----------------   |   cause if the thing on the left is a value, then we apply the function
+      v1 t2 --> v1 t'2   |   rather than evaluate its argument
+
+      (λx . t12) t2 --> [x --> t2] t12
+
